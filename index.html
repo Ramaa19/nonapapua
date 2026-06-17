@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday, Alyaa 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+  --blush:   #f2c4ce;
+  --rose:    #d4607a;
+  --deep:    #8b2a42;
+  --gold:    #c8a96e;
+  --cream:   #fdf8f5;
+  --ink:     #1e1014;
+  --muted:   #8a6472;
+  --paper:   #fffcf9;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── Petals falling ── */
+.petal-layer {
+  position: fixed; inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.petal {
+  position: absolute;
+  top: -60px;
+  width: 18px; height: 22px;
+  background: radial-gradient(ellipse at 30% 30%, #f9d0da, #e8829a);
+  border-radius: 50% 0 50% 0;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(0) rotate(0deg) translateX(0); opacity: 0; }
+  10%  { opacity: 0.7; }
+  90%  { opacity: 0.4; }
+  100% { transform: translateY(105vh) rotate(360deg) translateX(60px); opacity: 0; }
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px 60px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(242,196,206,0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 40% at 80% 80%, rgba(200,169,110,0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* UKURAN TEKS INI SUDAH DIPERBESAR SECARA RESPONSIF */
+.hero-eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 500;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: riseUp 1s ease forwards 0.3s;
+}
+
+.hero-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(4.5rem, 14vw, 9rem);
+  color: var(--rose);
+  line-height: 1;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: riseUp 1.2s ease forwards 0.6s;
+  text-shadow: 0 2px 40px rgba(212,96,122,0.25);
+}
+
+.hero-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: riseUp 1s ease forwards 0.9s;
+}
+
+.hero-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+  opacity: 0;
+  animation: riseUp 1s ease forwards 1.2s;
+}
+.hero-line span {
+  display: block;
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.hero-line span:last-child {
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.hero-line-icon {
+  font-size: 18px;
+  color: var(--gold);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: riseUp 1s ease forwards 2s;
+}
+.scroll-hint span {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.scroll-dot {
+  width: 6px; height: 6px;
+  background: var(--rose);
+  border-radius: 50%;
+  animation: bounce 1.6s ease infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes riseUp {
+  from { opacity:0; transform: translateY(28px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ── SECTION WRAPPER ── */
+section {
+  position: relative;
+  z-index: 1;
+  padding: 80px 24px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.section-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 300;
+  text-align: center;
+  color: var(--deep);
+  margin-bottom: 48px;
+  letter-spacing: 1px;
+}
+.section-heading em {
+  font-style: italic;
+  color: var(--rose);
+}
+
+/* ── GALLERY ── */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto auto;
+  gap: 14px;
+}
+
+/* Polaroid style */
+.photo-card {
+  background: white;
+  padding: 10px 10px 30px;
+  box-shadow: 0 4px 24px rgba(139,42,66,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  border-radius: 3px;
+  transition: transform 0.4s cubic-bezier(.22,.61,.36,1), box-shadow 0.4s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+.photo-card:nth-child(1) { transform: rotate(-2deg); }
+.photo-card:nth-child(2) { transform: rotate(1.5deg); }
+.photo-card:nth-child(3) { transform: rotate(-1deg); }
+.photo-card:nth-child(4) { transform: rotate(2deg); }
+.photo-card:nth-child(5) { transform: rotate(-1.5deg); }
+.photo-card:nth-child(6) { transform: rotate(1deg); }
+.photo-card:hover {
+  transform: rotate(0deg) scale(1.06) translateY(-8px) !important;
+  box-shadow: 0 20px 50px rgba(139,42,66,0.18);
+  z-index: 10;
+}
+
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-caption {
+  text-align: center;
+  font-family: 'Great Vibes', cursive;
+  font-size: 1.1rem;
+  color: var(--rose);
+  padding-top: 8px;
+}
+
+/* ── DIVIDER ── */
+.ornament-divider {
+  text-align: center;
+  padding: 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: var(--blush);
+  font-size: 22px;
+}
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--blush), transparent);
+}
+
+/* ── LETTER ── */
+.letter-outer {
+  position: relative;
+}
+
+.letter-bg-circle {
+  position: absolute;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(242,196,206,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.letter-card {
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 64px 72px;
+  position: relative;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 8px 32px rgba(139,42,66,0.08),
+    0 32px 64px rgba(139,42,66,0.05);
+  border-top: 3px solid var(--gold);
+}
+
+/* Wax seal effect top center */
+.wax-seal {
+  position: absolute;
+  top: -26px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px; height: 52px;
+  background: radial-gradient(circle at 35% 35%, var(--rose), var(--deep));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow: 0 4px 16px rgba(139,42,66,0.4);
+  color: white;
+}
+
+.letter-salutation {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  color: var(--rose);
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+.letter-body {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.18rem;
+  line-height: 2;
+  color: #3a2028;
+  white-space: pre-wrap;
+  font-weight: 300;
+}
+
+.letter-body p + p { margin-top: 20px; }
+
+.letter-rule {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+  margin: 36px 0 28px auto;
+}
+
+.letter-sig {
+  text-align: right;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.4rem;
+  color: var(--deep);
+  line-height: 1.2;
+}
+.letter-sig small {
+  display: block;
+  font-family: 'Jost', sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 4px;
+}
+
+/* corner decorations */
+.letter-card::before,
+.letter-card::after {
+  content: '';
+  position: absolute;
+  width: 40px; height: 40px;
+  border-color: var(--blush);
+  border-style: solid;
+}
+.letter-card::before {
+  top: 18px; left: 18px;
+  border-width: 1px 0 0 1px;
+}
+.letter-card::after {
+  bottom: 18px; right: 18px;
+  border-width: 0 1px 1px 0;
+}
+
+/* ── FLOATING HEARTS ── */
+.floating-hearts {
+  position: fixed;
+  bottom: 28px; right: 28px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: none;
+}
+.fheart {
+  font-size: 20px;
+  opacity: 0;
+  animation: floatH 5s ease-in infinite;
+}
+.fheart:nth-child(2) { animation-delay: 1.8s; font-size: 14px; }
+.fheart:nth-child(3) { animation-delay: 3.4s; font-size: 16px; }
+@keyframes floatH {
+  0%   { opacity:0; transform: translateY(0) scale(0.8); }
+  20%  { opacity:1; }
+  100% { opacity:0; transform: translateY(-120px) scale(1.3); }
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 60px 24px 40px;
+  overflow: hidden;
+}
+
+.footer-name {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  color: var(--rose);
+  margin-bottom: 8px;
+}
+
+.footer-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.footer-line {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 300px;
+  margin: 0 auto 28px;
+}
+.footer-line::before,
+.footer-line::after {
+  content:'';
+  flex:1;
+  height: 1px;
+  background: var(--blush);
+}
+
+.footer-copy {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #c9a0ae;
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .letter-card { padding: 48px 28px; }
+  .letter-body { font-size: 1.05rem; }
+}
+@media (max-width: 400px) {
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Falling Petals -->
+<div class="petal-layer" id="petalLayer"></div>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <p class="hero-eyebrow">✦ Selamat Ulang Tahun ✦</p>
+  <h1 class="hero-name"></h1>
+  <p class="hero-sub">sedikit surat kecil untuk mu, Nona Papua</p>
+  <div class="hero-line">
+    <span></span>
+    <span class="hero-line-icon">♡</span>
+    <span></span>
+  </div>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-dot"></div>
+  </div>
+</div>
+
+<!-- ── GALLERY ── -->
+<section>
+  <div class="reveal">
+    <p class="section-label">foto terindah</p>
+    <h2 class="section-heading">Sedikit Foto Foto <em>Tentangmu</em></h2>
+  </div>
+
+  <div class="gallery-grid reveal">
+    <div class="photo-card">
+      <img src="oke.jpeg" alt="Kenangan 1">
+      <div class="photo-caption">♡</div>
+    </div>
+    <div class="photo-card">
+      <img src="oke1.jpeg" alt="Kenangan 2">
+      <div class="photo-caption">♡</div>
+    </div>
+    <div class="photo-card">
+      <img src="oke2.jpeg" alt="Kenangan 3">
+      <div class="photo-caption">♡</div>
+    </div>
+    <div class="photo-card">
+      <img src="oke3.jpeg" alt="Kenangan 4">
+      <div class="photo-caption">♡</div>
+    </div>
+    <div class="photo-card">
+      <img src="oke5.jpeg" alt="Kenangan 5">
+      <div class="photo-caption">♡</div>
+    </div>
+    <div class="photo-card">
+      <img src="oke6.jpeg" alt="Kenangan 6">
+      <div class="photo-caption">♡</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DIVIDER ── -->
+<div class="ornament-divider">✦</div>
+
+<!-- ── LETTER ── -->
+<section class="letter-outer">
+  <div class="letter-bg-circle"></div>
+  <div class="reveal">
+    <p class="section-label">surat untukmu</p>
+    <h2 class="section-heading">Pesan <em>Di hari Spesialmu</em></h2>
+  </div>
+
+  <div class="letter-card reveal">
+    <div class="wax-seal">💌</div>
+
+    <p class="letter-salutation">Selamat Ulang Tahun yaa Nona Papua 🎉,</p>
+
+    <div class="letter-body">
+Happy birthday Nona Papua semoga dengan bertambahnya usiamu, semakin sempurna juga imanmu, rajin ibadahnya, selalu diberi kesehatan sama yang mahakuasa, panjang umur, selalu bahagia, berbakti terus sama orangtua, serta segala doa dan cita-cita yang kamu inginkan bisa terwujud dan dimudahkan dalam segala urusan. Aamiin.
+
+Sekarang kamu udah kepala 2, sekarang kamu semakin dewasa yang dimana kamu pasti tau yang terbaik maupun yang gak buat diri kamu, harus lebih dewasa dari sebelumnya yaa, jangan pernah cape buat perbaiki diri jadi lebih baik lagi.
+
+Semangat terus buat kejar semua keinginan kamu, kamu pasti bisa sayang, jangan pernah takut gagal yaa, aku selalu dukung kamu dan support kamu sayang.
+
+Semangat terus ya bu dok, aku selalu ada walaupun ga disamping kamu, tetap selalu rendah hati, jadi anak baik ya, selalu sayang sama keluarga, jangan lupa juga untuk selalu bersyukur, semoga apapun yang kamu lakukan hari ini dan hari berikutnya selalu diberi kelancaran serta keselamatan. Aamiin.
+
+Maaf gabisa selalu ada disamping kamu, walaupun terhalang jarak, aku selalu berdoa agar kamu dalam lindungan Tuhan, semoga aku bisa nemenin kamu di ulang tahun yang akan datang di tahun berikutnya yaa sayang. Aamiin.</div>
+
+    <div class="letter-rule"></div>
+    <div class="letter-sig">
+      Radja
+      <small>Dengan penuh cinta ❤️</small>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="site-footer">
+  <div class="footer-name reveal">Happy Birthday Alyaa  </div>
+  <p class="footer-sub reveal">Semoga hari ini seindah senyummu 🌸</p>
+  <div class="footer-line">♡</div>
+  <p class="footer-copy">Dibuat dengan sepenuh hati di medan untukmu </p>
+</footer>
+
+<!-- Floating hearts -->
+<div class="floating-hearts">
+  <div class="fheart">💕</div>
+  <div class="fheart">🌸</div>
+  <div class="fheart">💖</div>
+</div>
+
+<script>
+/* ── Falling petals ── */
+const layer = document.getElementById('petalLayer');
+for (let i = 0; i < 18; i++) {
+  const p = document.createElement('div');
+  p.className = 'petal';
+  const size = 10 + Math.random() * 14;
+  p.style.cssText = `
+    left: ${Math.random() * 100}%;
+    width: ${size}px;
+    height: ${size * 1.2}px;
+    animation-duration: ${7 + Math.random() * 10}s;
+    animation-delay: ${Math.random() * 12}s;
+    opacity: 0;
+    transform: rotate(${Math.random() * 360}deg);
+  `;
+  layer.appendChild(p);
+}
+
+/* ── Confetti burst on load ── */
+window.addEventListener('load', () => {
+  const end = Date.now() + 3500;
+  (function frame() {
+    confetti({ particleCount: 4, angle: 60,  spread: 50, origin: { x: 0 }, colors: ['#d4607a','#f2c4ce','#c8a96e','#fff'] });
+    confetti({ particleCount: 4, angle: 120, spread: 50, origin: { x: 1 }, colors: ['#d4607a','#f2c4ce','#c8a96e','#fff'] });
+    if (Date.now() < end) requestAnimationFrame(frame);
+  })();
+});
+
+/* ── Click confetti ── */
+document.addEventListener('click', e => {
+  confetti({
+    particleCount: 25,
+    spread: 55,
+    colors: ['#d4607a','#f2c4ce','#c8a96e','#8b2a42'],
+    origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }
+  });
+});
+
+/* ── Scroll reveal ── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(el => {
+    if (el.isIntersecting) { el.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
